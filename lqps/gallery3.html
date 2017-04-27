@@ -1,0 +1,72 @@
+<!--Created by Loojence Kuttukaren for Little Queens Public School http://www.kirorimalschool.com/view-photos.php?gal=1-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>LQPS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            // Animate loader off screen
+            $(".se-pre-con").hide();
+        });
+    </script>
+</head>
+
+<body style="background-image:url(assets/images/calbackground.jpg)">
+    <div class="se-pre-con"></div>
+    <nav class="navhead navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="menubar navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar fa fa-bars"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <div>
+                    <a href="index.html"><img class="logo" src="assets/images/logo.jpg"></a>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="navfont" href="index.html"><span class="fa fa-home"></span> Home</a></li>
+                    <li><a class="navfont" href="staff.html"><span class="fa fa-users"></span> Meet Us </a></li>
+                    <li><a class="navfont" href="admission.html"><span class="fa fa-sign-in"></span> Admission</a></li>
+                    <li><a class="navfont" href="academics.html"><span class="fa fa-graduation-cap"></span> Academics</a></li>
+                    <li><a class="navfont" href="calendar.html"><span class="fa fa-calendar"></span> Calander</a></li>
+                    <li><a class="navfont" href="lately.html"><span class="fa fa-fire"></span> Lately </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="image" class="imageDiv"> </div>
+</body>
+<script type="text/javascript">
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    var dir = "/assets/images/image3";
+    var fileextension = [".jpeg", ".JPG", ".jpg", ".png"];
+    var i = 0;
+    $.ajax({
+        //This will retrieve the contents of the folder if the folder is configured as 'browsable'
+        url: baseUrl + dir
+        , success: function (data) {
+            //Lsit all png file names in the page
+            $.each(fileextension, function () {
+                console.log(fileextension[i])
+                $(data).find("a:contains(" + fileextension[i] + ")").each(function () {
+                    var name = this.href.split('/').pop();
+                    var filename = baseUrl + dir + "/" + name;
+                    $('#image').prepend('<img class="imageSrc" src="' + filename + '"><br><br><br>');
+                });
+                i++;
+            });
+        }
+    });
+</script>
+
+</html>
